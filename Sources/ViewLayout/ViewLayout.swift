@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import AssociatedFactory
 
 public final class ViewLayout {
 

@@ -1,12 +1,13 @@
 //
 //  AssociatedFactory.swift
-//  ViewLayout
+//  AssociatedFactory
 //
 
 import Foundation
 
 public final class AssociatedFactory<T: AnyObject> {
 
+    public init() { }
     /// Accesses associated object.
     /// - Parameter associatedObject: An object whose associated object is to be accessed.
     /// - Parameter initializer: A clouser whose associated object is to be accessed.

@@ -1,5 +1,5 @@
 //
-//  ViewLayout+Utilities.swift
+//  Utilities.swift
 //  ViewLayout
 //
 
