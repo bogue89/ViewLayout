@@ -6,13 +6,13 @@
 import UIKit
 import AssociatedFactory
 
-public final class ViewLayout {
+public typealias VerticalAnchor = NSLayoutYAxisAnchor
+public typealias HorizontalAnchor = NSLayoutXAxisAnchor
+public typealias DimensionAnchor = NSLayoutDimension
+public typealias Attribute = NSLayoutConstraint.Attribute
+public typealias Relation = NSLayoutConstraint.Relation
 
-    public typealias VerticalAnchor = NSLayoutYAxisAnchor
-    public typealias HorizontalAnchor = NSLayoutXAxisAnchor
-    public typealias DimensionAnchor = NSLayoutDimension
-    public typealias Attribute = NSLayoutConstraint.Attribute
-    public typealias Relation = NSLayoutConstraint.Relation
+public final class ViewLayout {
 
     private static var Factory = AssociatedFactory<ViewLayout>()
 
