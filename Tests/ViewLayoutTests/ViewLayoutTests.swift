@@ -34,7 +34,7 @@ final class ViewLayoutTests: XCTestCase {
     func testResolvedRelationship() {
         let superview = UIView()
         let view = UIView()
-
+        view.translatesAutoresizingMaskIntoConstraints = true
         superview.addSubview(view)
         view.layout.top.constant = 0
 

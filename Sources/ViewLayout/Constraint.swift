@@ -64,13 +64,6 @@ public class Constraint: Hashable {
                          constant: CGFloat = 0,
                          priority: UILayoutPriority = .defaultHigh,
                          active: Bool = false) {
-
-        self.item = secondItem
-        self.attribute = secondAttribute
-        self.relation = relation
-        self.multiplier = multiplier
-        self.constant = constant
-        self.priority = priority
         self._constraint = NSLayoutConstraint(item: firstItem,
                                               attribute: firstAttribute,
                                               relatedBy: relation,
@@ -86,21 +79,21 @@ public class Constraint: Hashable {
                                    relation: Relation? = nil,
                                    multiplier: CGFloat? = nil,
                                    constant: CGFloat? = nil) -> NSLayoutConstraint {
-
         guard let firstItem = _constraint.firstItem else {
             fatalError("trying to resolve unconfigured constraint")
         }
         let firstAttribute = _constraint.firstAttribute
         let relation = relation ?? _constraint.relation
-        var secondItem = (item ?? _constraint.secondItem)
+        var secondItem = item ?? _constraint.secondItem
         let secondAttribute = attribute ?? _constraint.secondAttribute
         let multiplier = multiplier ?? _constraint.multiplier
         let constant = constant ?? _constraint.constant
 
-        if constant != 0,
-           let first = firstItem as? UIView,
+        // constraint to itself
+        if let first = firstItem as? UIView,
            let second = secondItem as? UIView,
            first == second {
+            // absolute value to not dimentional attribute
             if !([.width, .height].contains(firstAttribute)) {
                 secondItem = first.superview
             } else if firstAttribute == secondAttribute {
@@ -143,43 +136,58 @@ public class Constraint: Hashable {
         }
     }
 
-    public weak var item: AnyObject? {
-        didSet {
+    public var item: AnyObject? {
+        get {
+            _constraint.secondItem
+        }
+        set {
             // Cannot assign to property: 'secondItem' is a get-only property
             //  constraint.secondItem = secondItem
-            _constraint = resolveConstraint(item: item)
+            _constraint = resolveConstraint(item: newValue)
         }
     }
 
     public var attribute: Attribute? {
-        didSet {
+        get {
+            _constraint.secondAttribute
+        }
+        set {
             // Cannot assign to property: 'secondAttribute' is a get-only property
             //  constraint.secondAttribute = secondAttribute
-            _constraint = resolveConstraint(attribute: attribute)
+            _constraint = resolveConstraint(attribute: newValue)
         }
     }
 
     public var relation: Relation {
-        didSet {
+        get {
+            _constraint.relation
+        }
+        set {
             // Cannot assign to property: 'relation' is a get-only property
             // constraint.relation = relation
-            _constraint = resolveConstraint(relation: relation)
+            _constraint = resolveConstraint(relation: newValue)
         }
     }
 
     public var multiplier: CGFloat {
-        didSet {
+        get {
+            _constraint.multiplier
+        }
+        set {
             // Cannot assign to property: 'multiplier' is a get-only property
             // constraint.multiplier = multiplier
-            _constraint = resolveConstraint(multiplier: multiplier)
+            _constraint = resolveConstraint(multiplier: newValue)
         }
     }
 
     public var constant: CGFloat {
-        didSet {
+        get {
+            _constraint.multiplier
+        }
+        set {
             // Can assign property: 'constant' but we want to handle conflicts
             // constraint.constant = constant
-            _constraint = resolveConstraint(constant: constant)
+            _constraint = resolveConstraint(constant: newValue)
         }
     }
 
@@ -193,9 +201,12 @@ public class Constraint: Hashable {
     }
 
     public var priority: UILayoutPriority {
-        didSet {
+        get {
+            _constraint.priority
+        }
+        set {
             // Can assign property: 'priority' and wait for a change in properties to apply it
-            _constraint.priority = priority
+            _constraint.priority = newValue
         }
     }
 

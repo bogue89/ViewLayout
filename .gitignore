@@ -1,4 +1,5 @@
 .DS_Store
+/Demo
 /.build
 /Packages
 /*.xcodeproj
