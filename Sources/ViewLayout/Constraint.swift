@@ -56,14 +56,14 @@ public class Constraint: Hashable {
     }
 
     required init(item firstItem: AnyObject,
-                         attribute firstAttribute: Attribute,
-                         relatedBy relation: Relation = .equal,
-                         toItem secondItem: AnyObject?,
-                         toAttribute secondAttribute: Attribute?,
-                         multiplier: CGFloat = 1,
-                         constant: CGFloat = 0,
-                         priority: UILayoutPriority = .defaultHigh,
-                         active: Bool = false) {
+                  attribute firstAttribute: Attribute,
+                  relatedBy relation: Relation = .equal,
+                  toItem secondItem: AnyObject?,
+                  toAttribute secondAttribute: Attribute?,
+                  multiplier: CGFloat = 1,
+                  constant: CGFloat = 0,
+                  priority: UILayoutPriority = .defaultHigh,
+                  active: Bool = false) {
         self._constraint = NSLayoutConstraint(item: firstItem,
                                               attribute: firstAttribute,
                                               relatedBy: relation,
@@ -87,7 +87,7 @@ public class Constraint: Hashable {
         var secondItem = item ?? _constraint.secondItem
         let secondAttribute = attribute ?? _constraint.secondAttribute
         let multiplier = multiplier ?? _constraint.multiplier
-        let constant = constant ?? _constraint.constant
+        var constant = constant ?? _constraint.constant
 
         // constraint to itself
         if let first = firstItem as? UIView,
@@ -100,7 +100,10 @@ public class Constraint: Hashable {
                 secondItem = nil
             }
         }
-
+        // use multiplier with absolute values
+        if secondItem == nil {
+            constant *= multiplier
+        }
         return NSLayoutConstraint(item: firstItem,
                                   attribute: firstAttribute,
                                   relatedBy: relation,
@@ -182,7 +185,7 @@ public class Constraint: Hashable {
 
     public var constant: CGFloat {
         get {
-            _constraint.multiplier
+            _constraint.constant
         }
         set {
             // Can assign property: 'constant' but we want to handle conflicts

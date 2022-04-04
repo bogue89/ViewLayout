@@ -12,8 +12,7 @@ public class Anchor<T: AnyObject> {
 
     public init(_ anchor: NSLayoutAnchor<T>) {
         self._anchor = anchor
-        self._constraint = Constraint(anchor.constraint(equalTo: anchor),
-                                      toItem: nil)
+        self._constraint = Constraint(anchor.constraint(equalTo: anchor), toItem: nil)
     }
 
     public var anchor: NSLayoutAnchor<T> {

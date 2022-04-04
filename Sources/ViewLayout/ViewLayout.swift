@@ -23,7 +23,7 @@ public final class ViewLayout {
     }
 
     /// view object to be constraint
-    private unowned var view: UIView
+    private unowned let view: UIView
 
     public init(_ view: UIView) {
         self.view = view
@@ -56,6 +56,28 @@ public final class ViewLayout {
 }
 
 public extension ViewLayout {
+
+    // Add Subview with requirements
+    @discardableResult
+    func insert(in view: UIView) -> ViewLayout {
+        view.addSubview(self.view)
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+        return self
+    }
+
+    // Add Subview with requirements
+    @discardableResult
+    func layout() -> Self {
+        (self.view.superview ?? self.view).layoutIfNeeded()
+        return self
+    }
+
+    func superview() -> UIView {
+        guard let superview = self.view.superview else {
+            fatalError("can layout view without superview")
+        }
+        return superview
+    }
 
     @discardableResult
     func constraint(_ attribute: Attribute,

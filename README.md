@@ -4,8 +4,10 @@ ViewLayout is an UIView-associated manager for anchors, using layout guides to r
 
 ## Xcode
 
-In `Package Dependencies` inside your project file paste the repo url `https://github.com/bogue89/ViewLayout` in the field "Search or Enter Package URL"
+In `Package Dependencies` inside your project file paste the repo url `https://github.com/bogue89/ViewLayout` in the field "Search or Enter Package URL".
+
 Set the Dependency Rule to Up to Next Major Version using the latest `ViewLayout` [release](https://github.com/bogue89/ViewLayout/releases)
+
 Resolve Package Versions
 
 ## Swift Package Manager
