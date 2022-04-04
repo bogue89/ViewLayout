@@ -5,14 +5,7 @@
 
 import UIKit
 
-public class Constraint: Hashable {
-
-    public static func == (lhs: Constraint, rhs: Constraint) -> Bool {
-        ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-    public final func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self))
-    }
+public class Constraint {
 
     convenience init(_ constraint: NSLayoutConstraint,
                      toItem secondItem: AnyObject? = nil,
